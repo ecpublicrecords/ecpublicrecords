@@ -1,11 +1,27 @@
+// Function to show the username prompt
+function showUsernamePrompt() {
+    document.getElementById("page1").style.display = "block";
+    document.getElementById("page2").style.display = "none";
+}
+
+// Function to show the profile and tabs after searching
+function showProfileAndTabs(profile) {
+    // Update profile information on the page
+    document.getElementById("profilePic").src = profile.profilePic;
+    document.getElementById("profileUsername").textContent = profile.username;
+
+    // Show page2
+    document.getElementById("page1").style.display = "none";
+    document.getElementById("page2").style.display = "block";
+}
+
+// Event listener for username input
 document.getElementById("robloxUsername").addEventListener("input", function () {
     // Perform validation or other checks as needed
 });
 
+// Function to search for a profile and display it
 function searchProfile() {
-    // Fetch and display profile information, then show page2
-    // Also, log the username somewhere
-
     const username = document.getElementById("robloxUsername").value;
 
     // Perform validation or other checks as needed
@@ -20,15 +36,11 @@ function searchProfile() {
     // Log the username (you can log it wherever needed)
     console.log("Searched username:", username);
 
-    // Update profile information on the page
-    document.getElementById("profilePic").src = profile.profilePic;
-    document.getElementById("profileUsername").textContent = profile.username;
-
-    // Show page2
-    document.getElementById("page1").style.display = "none";
-    document.getElementById("page2").style.display = "block";
+    // Show profile and tabs
+    showProfileAndTabs(profile);
 }
 
+// Function to switch between tabs
 function switchTab(tabName) {
     // Handle switching between tabs
     // Dynamically update content based on the selected tab
@@ -55,6 +67,7 @@ function switchTab(tabName) {
     }
 }
 
+// Function to search for an offender
 function searchOffender() {
     // Implement logic to search for an offender
     const searchTerm = document.getElementById("searchBar").value;
@@ -64,9 +77,12 @@ function searchOffender() {
     offenderList.innerHTML = "<li>Offender1 - Crime1</li><li>Offender2 - Crime2</li>";
 }
 
+// Function to handle logout and clear username
 function logout() {
     // Handle logout and clearing username
     document.getElementById("robloxUsername").value = "";
-    document.getElementById("page2").style.display = "none";
-    document.getElementById("page1").style.display = "block";
+    showUsernamePrompt();
 }
+
+// Initially show the username prompt
+showUsernamePrompt();
