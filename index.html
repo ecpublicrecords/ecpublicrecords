@@ -14,7 +14,21 @@
     </div>
 
     <div id="page2" class="page">
-        <!-- Content for page 2 -->
+        <div id="profileInfo">
+            <img id="profilePic" src="" alt="Roblox Profile">
+            <p id="profileUsername"></p>
+        </div>
+        <div class="tabs">
+            <button onclick="switchTab('blackmarks')">Blackmarks</button>
+            <button onclick="switchTab('classExpendable')">Class Expendable</button>
+            <button onclick="switchTab('foundationBlacklist')">Foundation Blacklist</button>
+        </div>
+        <div id="tabContent" class="tabContent">
+            <!-- Content for each tab -->
+        </div>
+        <input type="text" id="searchBar" placeholder="Search Offender">
+        <button onclick="searchOffender()">Search</button>
+        <button id="logoutBtn" onclick="logout()">Logout</button>
     </div>
 
     <script src="script.js"></script>
