@@ -14,6 +14,10 @@ function switchTab(tabName) {
     // Handle switching between tabs
 }
 
+function searchOffender() {
+    // Implement logic to search for an offender
+}
+
 function logout() {
     // Handle logout and clearing username
     document.getElementById("robloxUsername").value = "";
