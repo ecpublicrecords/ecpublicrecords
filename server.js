@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const axios = require('axios'); // Add this line to use Axios for HTTP requests
 const app = express();
 const PORT = 3000;
 
@@ -9,18 +10,33 @@ const searchLogs = [];
 
 app.use(bodyParser.json());
 
+// Function to fetch Roblox user avatar URL
+async function getRobloxAvatarUrl(username) {
+    try {
+        const response = await axios.get(`https://api.roblox.com/users/get-by-username?username=${username}`);
+        const userId = response.data.Id;
+        return `https://www.roblox.com/Thumbs/Avatar.ashx?x=150&y=150&userid=${userId}`;
+    } catch (error) {
+        console.error('Error fetching Roblox avatar URL:', error.message);
+        return null;
+    }
+}
+
 // Endpoint for searching profiles
-app.post('/searchProfile', (req, res) => {
+app.post('/searchProfile', async (req, res) => {
     const { username } = req.body;
 
-    // Simulate fetching profile information (replace with actual logic)
-    const profile = {
-        username,
-        profilePic: 'https://example.com/profilepic.jpg', // Replace with actual URL
-    };
+    // Fetch Roblox avatar URL
+    const avatarUrl = await getRobloxAvatarUrl(username);
 
     // Log the search
     searchLogs.push({ searchedUser: username, timestamp: new Date() });
+
+    // Return profile with avatar URL
+    const profile = {
+        username,
+        profilePic: avatarUrl || 'https://example.com/default-avatar.jpg', // Provide a default avatar URL
+    };
 
     res.json(profile);
 });
